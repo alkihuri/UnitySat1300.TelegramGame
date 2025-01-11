@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    <div id="unity-container" style="position: absolute; width: 100%; height: 100%; left: 0%; top: 0%;">
-      <canvas id="unity-canvas" style="position: absolute; width: 100%; height: 100%"></canvas>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width=600 height=960></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -17,7 +17,11 @@
         </div>
       </div>
       <div id="unity-warning"> </div>
-
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">UnitySat1300.Unity</div>
+      </div>
     </div>
     <script>
       var container = document.querySelector("#unity-container");
@@ -52,11 +56,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/UnitySat1300_WebGL_24122024.loader.js";
+      var loaderUrl = buildUrl + "/UnitySat1300.TelegramGame.loader.js";
       var config = {
-        dataUrl: buildUrl + "/UnitySat1300_WebGL_24122024.data",
-        frameworkUrl: buildUrl + "/UnitySat1300_WebGL_24122024.framework.js",
-        codeUrl: buildUrl + "/UnitySat1300_WebGL_24122024.wasm",
+        dataUrl: buildUrl + "/UnitySat1300.TelegramGame.data",
+        frameworkUrl: buildUrl + "/UnitySat1300.TelegramGame.framework.js",
+        codeUrl: buildUrl + "/UnitySat1300.TelegramGame.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "UnitySat1300.Unity",
@@ -89,8 +93,8 @@
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
+        canvas.style.width = "600px";
+        canvas.style.height = "960px";
       }
 
       loadingBar.style.display = "block";
@@ -102,9 +106,9 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
-          //fullscreenButton.onclick = () => {
-          //  unityInstance.SetFullscreen(1);
-          //};
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
         }).catch((message) => {
           alert(message);
         });
